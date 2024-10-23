@@ -3,6 +3,7 @@ import "./App.css";
 import Button from "./components/Button";
 import Card, { CardBody } from "./components/Card";
 import List from "./components/List";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 function App() {
   const [items, setItems] = useState([
@@ -38,8 +39,13 @@ function App() {
   return (
     <>
       <Card>
-        <Button onClick={addMinion}>Add Minion</Button>
-        <Button onClick={removeMinion}>Remove Minion</Button>
+        <Button onClick={addMinion}>
+          Add Minion <FaPlus />{" "}
+        </Button>
+        <Button onClick={removeMinion}>
+          {" "}
+          Remove Minion <FaMinus />{" "}
+        </Button>
 
         <CardBody title="Factory" text="Minion Factory by AMG" />
         {contenido}
