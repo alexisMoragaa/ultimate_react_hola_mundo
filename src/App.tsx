@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import Button2 from "./components/Button/Button2";
 import Card, { CardBody } from "./components/Card";
 import List from "./components/List";
 import Alert from "./components/Alert";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { IoIosSend } from "react-icons/io";
 import "./App.css";
 
 function App() {
@@ -43,15 +45,18 @@ function App() {
     setAlertState(!alertState);
   };
 
+  const [stateSendButton, setStateSendButton] = useState(false);
+  const onCLickSendButton = () => setStateSendButton(!stateSendButton);
+
   return (
     <>
       <Card>
         <Button onClick={addMinion}>
-          Add Minion <FaPlus />{" "}
+          Add Minion <FaPlus />
         </Button>
+
         <Button onClick={removeMinion}>
-          {" "}
-          Remove Minion <FaMinus />{" "}
+          Remove Minion <FaMinus />
         </Button>
 
         <CardBody title="Factory" text="Minion Factory by AMG" />
@@ -61,9 +66,17 @@ function App() {
         </Button>
       </Card>
 
+      <hr />
+
       <Alert alertState={alertState} onClick={onClickAlert}>
         Alert Reto 01 Modulo Estilos
       </Alert>
+
+      <hr />
+
+      <Button2 onClick={onCLickSendButton} state={stateSendButton}>
+        Enviar <IoIosSend />
+      </Button2>
     </>
   );
 }

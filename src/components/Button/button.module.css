@@ -1,11 +1,17 @@
-.button {
-  background: red;
-}
-
-.padded {
+.btn {
+  margin: 2px 5px;
+  border-radius: 3px;
   padding: 5px 10px;
+  cursor: pointer;
+  transition: all ease 0.3s;
 }
 
-.color {
+.btnPrimary {
+  background: salmon;
+  border: 1px solid darksalmon;
   color: white;
+}
+
+.btnPrimary:hover {
+  background: lightsalmon;
 }

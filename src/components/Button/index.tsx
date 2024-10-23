@@ -15,9 +15,8 @@ function Button({ children, onClick, isLoading }: ButtonProps) {
   const className = [
     "btn",
     isLoading ? "btn-secondary" : "btn-primary",
-    style.button,
-    style.padded,
-    style.color,
+    style.btn,
+    style.btnPrimary,
   ].join(" ");
 
   return (
