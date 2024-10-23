@@ -1,9 +1,10 @@
 import { useState } from "react";
-import "./App.css";
 import Button from "./components/Button";
 import Card, { CardBody } from "./components/Card";
 import List from "./components/List";
+import Alert from "./components/Alert";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import "./App.css";
 
 function App() {
   const [items, setItems] = useState([
@@ -36,6 +37,12 @@ function App() {
 
   const handleClick = () => setisLoading(!isLoading);
 
+  const [alertState, setAlertState] = useState(false);
+
+  const onClickAlert = () => {
+    setAlertState(!alertState);
+  };
+
   return (
     <>
       <Card>
@@ -53,6 +60,10 @@ function App() {
           Hola Mundo
         </Button>
       </Card>
+
+      <Alert alertState={alertState} onClick={onClickAlert}>
+        Alert Reto 01 Modulo Estilos
+      </Alert>
     </>
   );
 }

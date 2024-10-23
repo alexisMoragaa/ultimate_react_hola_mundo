@@ -1,0 +1,17 @@
+.alert {
+  margin-top: 20px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.red {
+  background-color: #f44336;
+  border: 1px solid #9c0e03;
+}
+
+.blue {
+  background-color: #2196f3;
+  border: 1px solid #034f8d;
+}
