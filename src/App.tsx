@@ -5,26 +5,43 @@ import Card, { CardBody } from "./components/Card";
 import List from "./components/List";
 
 function App() {
-  const list: string[] = ["Tanjiro", "GOKU", "Naruto", "Luffy", "Ichigo"];
+  const [items, setItems] = useState([
+    "Tanjiro",
+    "GOKU",
+    "Naruto",
+    "Luffy",
+    "Ichigo",
+  ]);
 
   const handleSelect = (element: string) => {
     console.log("Elemento seleccionado", element);
   };
 
-  const contenido = list.length ? (
-    <List data={list} onSelect={handleSelect} />
+  const addMinion = () => {
+    setItems([...items, "Minion"]);
+  };
+
+  const removeMinion = () => {
+    setItems(items.slice(0, -1));
+  };
+
+  const contenido = items.length ? (
+    <List data={items} onSelect={handleSelect} />
   ) : (
     "Sin elementos elementos para mostrar"
   );
 
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setisLoading] = useState(false);
 
   const handleClick = () => setisLoading(!isLoading);
 
   return (
     <>
       <Card>
-        <CardBody title="Hola" text="mundo" />
+        <Button onClick={addMinion}>Add Minion</Button>
+        <Button onClick={removeMinion}>Remove Minion</Button>
+
+        <CardBody title="Factory" text="Minion Factory by AMG" />
         {contenido}
         <Button onClick={handleClick} isLoading={isLoading}>
           Hola Mundo

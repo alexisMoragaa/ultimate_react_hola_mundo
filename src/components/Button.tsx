@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type ButtonProps = {
   children: ReactNode;
   onClick: () => void;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 function Button({ children, onClick, isLoading }: ButtonProps) {
@@ -15,10 +15,10 @@ function Button({ children, onClick, isLoading }: ButtonProps) {
     <button
       onClick={handleClick}
       type="button"
-      disabled={!isLoading}
-      className={`btn ${isLoading ? "btn-primary" : "btn-secondary"}`}
+      disabled={isLoading}
+      className={`btn ${isLoading ? "btn-secondary" : "btn-primary"}`}
     >
-      {!isLoading ? "Cargando ..." : children}
+      {isLoading ? "Cargando ..." : children}
     </button>
   );
 }
