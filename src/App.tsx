@@ -7,6 +7,8 @@ import Alert from "./components/Alert";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import "./App.css";
+import ProductList from "./components/ProductList";
+import ProductDashboard from "./components/ProductDashboard";
 
 function App() {
   const [items, setItems] = useState([
@@ -48,6 +50,39 @@ function App() {
   const [stateSendButton, setStateSendButton] = useState(false);
   const onCLickSendButton = () => setStateSendButton(!stateSendButton);
 
+  const [products, setProducts] = useState([
+    { id: "1", name: "iphone" },
+    { id: "2", name: "samsung" },
+  ]);
+
+  const addEnd = () => {
+    setProducts([
+      ...products,
+      {
+        id: Math.random().toString(),
+        name: `Nuevo ${products.length + 1}`,
+      },
+    ]);
+  };
+
+  const addBegin = () => {
+    setProducts([
+      {
+        id: Math.random().toString(),
+        name: `Nuevo ${products.length + 1}`,
+      },
+      ...products,
+    ]);
+  };
+
+  const deleteEnd = () => {
+    setProducts(products.slice(0, -1));
+  };
+
+  const clean = () => {
+    setProducts([]);
+  };
+
   return (
     <>
       <Card>
@@ -77,6 +112,14 @@ function App() {
       <Button2 onClick={onCLickSendButton} state={stateSendButton}>
         Enviar <IoIosSend />
       </Button2>
+
+      <hr />
+      <Button onClick={addBegin}>Comienzo</Button>
+      <Button onClick={addEnd}>Final</Button>
+      <Button onClick={deleteEnd}>Eliminar</Button>
+      <Button onClick={clean}>Limpiar</Button>
+      <ProductDashboard total={products.length} />
+      <ProductList products={products} />
     </>
   );
 }
