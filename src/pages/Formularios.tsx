@@ -1,7 +1,32 @@
+import ReactHookForm from "../components/Forms/ReactHookForm";
+import FormControlled from "../components/Forms/FormControlled";
+import FormUnControlled from "../components/Forms/FormUncontrolled";
+
 function Formularios() {
   return (
     <>
-      <h2>Esta es la pagina que contendra los ejercicios de formularios</h2>
+      <h2 className="mb-4">Modulo Formularios</h2>
+
+      <div className="row mb-4">
+        <div className="col-6">
+          <h4>React Hook Form</h4>
+          <ReactHookForm />
+        </div>
+      </div>
+
+      <hr />
+
+      <div className="row">
+        <div className="col-6">
+          <h4>Uncontrolled Form</h4>
+          <FormUnControlled />
+        </div>
+
+        <div className="col-6">
+          <h4>Controlled Form</h4>
+          <FormControlled />
+        </div>
+      </div>
     </>
   );
 }
