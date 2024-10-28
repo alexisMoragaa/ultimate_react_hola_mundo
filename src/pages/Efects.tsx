@@ -1,7 +1,14 @@
-import useUsers from "../hooks/useUsers";
+import fetchData from "../hooks/fetchData";
+
+type User = {
+  id: string;
+  name: string;
+};
 
 function Efects() {
-  const { users, loading, error } = useUsers();
+  const url = "https://jsonplaceholder.typicode.com/users";
+
+  const { data, loading, error } = fetchData<User>(url);
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -17,8 +24,8 @@ function Efects() {
         Seccion <b>Efectos</b>
       </h3>
       <ul>
-        {users?.map((user) => {
-          return <li key={user.id}>{user.name}</li>;
+        {data?.map((d) => {
+          return <li key={d.id}>{d.name}</li>;
         })}
       </ul>
     </>
