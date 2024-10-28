@@ -1,22 +1,26 @@
-import { useEffect, useState } from "react";
-import Button from "../components/Button";
+import useUsers from "../hooks/useUsers";
 
 function Efects() {
-  const [token, setToken] = useState("");
+  const { users, loading, error } = useUsers();
 
-  useEffect(() => {
-    console.log("Se ejecuto el efecto", token);
-  }, [token]);
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
 
-  const onClick = () => {
-    setToken(Math.random().toString());
-  };
+  if (error && !loading) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <>
       <h3>
-        Seccion <b>Efect0s</b>
-        <Button onClick={onClick}>Obtener token</Button>
+        Seccion <b>Efectos</b>
       </h3>
+      <ul>
+        {users?.map((user) => {
+          return <li key={user.id}>{user.name}</li>;
+        })}
+      </ul>
     </>
   );
 }
