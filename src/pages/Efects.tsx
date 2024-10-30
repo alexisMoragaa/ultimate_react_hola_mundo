@@ -9,7 +9,8 @@ type User = {
 function Efects() {
   const url = "https://jsonplaceholder.typicode.com/users";
 
-  const { data, loading, error, addData, deleteData } = fetchData<User>(url);
+  const { data, loading, error, addData, deleteData, updatedData } =
+    fetchData<User>(url);
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -28,6 +29,10 @@ function Efects() {
         onClick={() => addData({ id: data.length + 1, name: "Nuevo usuario" })}
       >
         Añadir
+      </Button>
+
+      <Button onClick={() => updatedData({ id: 1, name: "Chanchito Feliz" })}>
+        Actualizar
       </Button>
 
       <ul>

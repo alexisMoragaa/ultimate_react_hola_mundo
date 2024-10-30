@@ -78,5 +78,25 @@ export default function fetchData<T extends ID>(url: string) {
     }
   };
 
-  return { data, loading, error, addData, deleteData };
+  const updatedData = async (updatedElement: T) => {
+    setLoading(true);
+    const initialData = [...data];
+    setData(data.map((x) => (x.id === updatedElement.id ? updatedElement : x)));
+
+    try {
+      const response = await fetch(`${url}/${updatedElement.id}`, {
+        method: "put",
+      });
+      if (!response.ok) {
+        setData(initialData);
+        throw new Error(`${response.status}`);
+      }
+    } catch (error) {
+      setError((error as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { data, loading, error, addData, deleteData, updatedData };
 }
