@@ -1,7 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Category, CategoryResponse } from "../../types";
+import { Category } from "../../types";
 import { Heading, Link, SkeletonText, VStack } from "@chakra-ui/react";
+import getCategories from "../../hooks/useFindMealHook";
 
 type Props = {
   selected: Category;
@@ -9,30 +8,9 @@ type Props = {
 };
 
 function SideBar({ selected, onClick }: Props) {
-  const [category, setCategory] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    let ignore = false;
-    const controller = new AbortController();
-    const { signal } = controller;
-    setLoading(true);
-
-    async function getCategory() {
-      const url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
-      axios
-        .get<CategoryResponse>(url, { signal })
-        .then(({ data }) => !ignore && setCategory(data.meals))
-        .finally(() => !ignore && setLoading(false));
-    }
-
-    getCategory();
-
-    return () => {
-      controller.abort();
-      ignore = true;
-    };
-  }, []);
+  const { dataCategory, loading } = getCategories<Category>(
+    "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+  );
 
   const selectedProps = {
     bgColor: "blue.400",
@@ -50,7 +28,7 @@ function SideBar({ selected, onClick }: Props) {
       </Heading>
 
       <VStack align="stretch">
-        {category.map((c) => {
+        {dataCategory.map((c) => {
           return (
             <Link
               px={2}
