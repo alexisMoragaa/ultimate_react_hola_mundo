@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Category, CategoryResponse } from "../../types";
-import { Heading, Link, VStack } from "@chakra-ui/react";
+import { Heading, Link, SkeletonText, VStack } from "@chakra-ui/react";
 
 type Props = {
   selected: Category;
@@ -13,27 +13,26 @@ function SideBar({ selected, onClick }: Props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    let ignore = false;
     const controller = new AbortController();
     const { signal } = controller;
+    setLoading(true);
 
     async function getCategory() {
-      setLoading(true);
       const url = "https://www.themealdb.com/api/json/v1/1/list.php?c=list";
-
       axios
         .get<CategoryResponse>(url, { signal })
-        .then(({ data }) => setCategory(data.meals))
-        .finally(() => setLoading(false));
+        .then(({ data }) => !ignore && setCategory(data.meals))
+        .finally(() => !ignore && setLoading(false));
     }
 
     getCategory();
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+      ignore = true;
+    };
   }, []);
-
-  if (loading) {
-    return <p>Cargando...</p>;
-  }
 
   const selectedProps = {
     bgColor: "blue.400",
@@ -42,7 +41,9 @@ function SideBar({ selected, onClick }: Props) {
     borderRadius: "3px",
   };
 
-  return (
+  return loading ? (
+    <SkeletonText mt="4" noOfLines={8} spacing="4" skeletonHeight="2" />
+  ) : (
     <>
       <Heading fontSize={15} mb={3} color="blue.400">
         CATEGORIAS
