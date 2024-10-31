@@ -8,7 +8,7 @@ type Props = {
 };
 
 function SideBar({ selected, onClick }: Props) {
-  const { dataCategory, loading } = getCategories<Category>(
+  const { data, loading } = getCategories<Category>(
     "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
   );
 
@@ -28,7 +28,7 @@ function SideBar({ selected, onClick }: Props) {
       </Heading>
 
       <VStack align="stretch">
-        {dataCategory.map((c) => {
+        {data.map((c) => {
           return (
             <Link
               px={2}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function getCategories<T>(url: string) {
-  const [dataCategory, setDataCategory] = useState<T[]>([]);
+export default function useFindMealHook<T>(url: string) {
+  const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function getCategories<T>(url: string) {
     async function getCategory() {
       axios
         .get<{ meals: T[] }>(url, { signal })
-        .then(({ data }) => !ignore && setDataCategory(data.meals))
+        .then(({ data }) => !ignore && setData(data.meals))
         .finally(() => !ignore && setLoading(false));
     }
 
@@ -24,7 +24,7 @@ export default function getCategories<T>(url: string) {
       controller.abort();
       ignore = true;
     };
-  }, []);
+  }, [url]);
 
-  return { dataCategory, loading };
+  return { data, loading };
 }
