@@ -2,6 +2,8 @@ export type Category = {
   strCategory: string;
 };
 
-export type CategoryResponse = {
-  meals: Category[];
+export type meals = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
 };
