@@ -1,15 +1,7 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  Heading,
-  SkeletonText,
-  Text,
-  Image,
-  CardFooter,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import { meals } from "../../types";
+import CardMeal from "./CardMeal";
+import SkeletonCard from "./SkeletonCard";
 
 type Props = {
   data: meals[];
@@ -17,33 +9,17 @@ type Props = {
 };
 
 function MainContent({ data, loading }: Props) {
-  return loading ? (
-    <SkeletonText mt="4" noOfLines={8} spacing="4" skeletonHeight="2" />
-  ) : (
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  return (
     <>
       <SimpleGrid
         spacing={4}
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
       >
-        {data.map((meal) => (
-          <Card key={meal.idMeal} boxShadow="lg">
-            <CardBody>
-              <Image
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
-                borderRadius="lg"
-              />
-              <Heading size="md">
-                <Text>{meal.strMeal}</Text>
-              </Heading>
-              <CardFooter p="0">
-                <Button color="white" bgColor="blue.400">
-                  Ver Receta
-                </Button>
-              </CardFooter>
-            </CardBody>
-          </Card>
-        ))}
+        {loading && skeletons.map((s) => <SkeletonCard key={s} />)}
+
+        {!loading &&
+          data.map((meal) => <CardMeal key={meal.idMeal} meal={meal} />)}
       </SimpleGrid>
     </>
   );
