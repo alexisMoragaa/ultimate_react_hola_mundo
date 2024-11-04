@@ -2,6 +2,7 @@ import { useState } from "react";
 import Dashboard from "../components/ContextPage/Dashboard";
 import MainContent from "../components/ContextPage/MainContent";
 import { Todo } from "../types";
+import TodosContext from "../contexts/TodosContext";
 
 function ContextPage() {
   const [todos, setTodo] = useState<Todo[]>([
@@ -15,8 +16,10 @@ function ContextPage() {
 
   return (
     <>
-      <Dashboard amount={todos.length} />
-      <MainContent todos={todos} addTodo={addTodo} />
+      <TodosContext.Provider value={{ todos, addTodo }}>
+        <Dashboard />
+        <MainContent />
+      </TodosContext.Provider>
     </>
   );
 }

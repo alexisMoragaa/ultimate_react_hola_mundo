@@ -1,11 +1,11 @@
-type Props = {
-  amount: number;
-};
+import { useContext } from "react";
+import TodosContext from "../../contexts/TodosContext";
 
-function Dashboard({ amount }: Props) {
+function Dashboard() {
+  const { todos } = useContext(TodosContext);
   return (
     <>
-      <p>{amount}</p>
+      <p>{todos.length}</p>
       <p>Dashboard</p>
     </>
   );

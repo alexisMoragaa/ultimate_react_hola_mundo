@@ -1,11 +1,8 @@
-import { Todo } from "../../types";
+import { useContext } from "react";
+import TodosContext from "../../contexts/TodosContext";
 
-type Props = {
-  todos: Todo[];
-  addTodo: (todo: Todo) => void;
-};
-
-function TodoList({ todos, addTodo }: Props) {
+function TodoList() {
+  const { todos, addTodo } = useContext(TodosContext);
   return (
     <>
       <button
