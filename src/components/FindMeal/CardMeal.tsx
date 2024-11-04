@@ -7,13 +7,14 @@ import {
   CardFooter,
   Heading,
 } from "@chakra-ui/react";
-import { meals } from "../../types";
+import { Meal } from "../../types";
 
 type props = {
-  meal: meals;
+  meal: Meal;
+  openRecipe: () => void;
 };
 
-function CardMeal({ meal }: props) {
+function CardMeal({ meal, openRecipe }: props) {
   return (
     <Card boxShadow="lg">
       <CardBody>
@@ -22,7 +23,7 @@ function CardMeal({ meal }: props) {
           <Text>{meal.strMeal}</Text>
         </Heading>
         <CardFooter p="0">
-          <Button color="white" bgColor="blue.400">
+          <Button color="white" bgColor="blue.400" onClick={openRecipe}>
             Ver Receta
           </Button>
         </CardFooter>

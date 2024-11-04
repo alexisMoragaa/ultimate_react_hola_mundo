@@ -1,12 +1,15 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import Header from "../components/FindMeal/Header";
 import SideBar from "../components/FindMeal/SideBar";
 import MainContent from "../components/FindMeal/MainContent";
-import { meals, Category, searchForm } from "../types";
+import { Meal, Category, searchForm } from "../types";
 import { useState } from "react";
 import useFindMealHook from "../hooks/useFindMealHook";
+import RecipiModal from "../components/FindMeal/RecipiModal";
 
 function FindMeal() {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   const [selectedCategory, setSelectedCategory] = useState<Category>({
     strCategory: "Beef",
   });
@@ -17,14 +20,20 @@ function FindMeal() {
     data: dataMeal,
     loading: loadingMeal,
     findMeals,
-  } = useFindMealHook<meals>(url);
+    // getDetailMeal,
+  } = useFindMealHook<Meal>(url);
 
   const searchMeal = (data: searchForm) => {
     url = `https:/www.themealdb.com/api/json/v1/1/search.php?s=${data.search}`;
     findMeals(url);
   };
 
-  console.log(url);
+  // const getIdMeal = (idMeal: string) => {
+  //   url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
+  //   console.log(url);
+  //   // getDetailMeal(url);
+  // };
+
   return (
     <>
       <Grid
@@ -59,9 +68,14 @@ function FindMeal() {
         </GridItem>
 
         <GridItem overflowY="auto" p="2" bg="gray.100" area={"main"}>
-          <MainContent data={dataMeal} loading={loadingMeal} />
+          <MainContent
+            data={dataMeal}
+            loading={loadingMeal}
+            openRecipe={onOpen}
+          />
         </GridItem>
       </Grid>
+      <RecipiModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
