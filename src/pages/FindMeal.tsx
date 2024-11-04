@@ -2,7 +2,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import Header from "../components/FindMeal/Header";
 import SideBar from "../components/FindMeal/SideBar";
 import MainContent from "../components/FindMeal/MainContent";
-import { meals, Category } from "../types";
+import { meals, Category, searchForm } from "../types";
 import { useState } from "react";
 import useFindMealHook from "../hooks/useFindMealHook";
 
@@ -13,14 +13,23 @@ function FindMeal() {
 
   let url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory.strCategory}`;
 
-  const { data: dataMeal, loading: loadingMeal } = useFindMealHook<meals>(url);
+  const {
+    data: dataMeal,
+    loading: loadingMeal,
+    findMeals,
+  } = useFindMealHook<meals>(url);
 
+  const searchMeal = (data: searchForm) => {
+    url = `https:/www.themealdb.com/api/json/v1/1/search.php?s=${data.search}`;
+    findMeals(url);
+  };
+
+  console.log(url);
   return (
     <>
       <Grid
         fontSize={14}
-        templateAreas={`"header header"
-                  "nav main"`}
+        templateAreas={`"header header" "nav main"`}
         gridTemplateRows={"60px 1fr"}
         gridTemplateColumns={{ sm: `0 1fr`, md: `230px 1fr` }}
       >
@@ -33,17 +42,18 @@ function FindMeal() {
           area={"header"}
           bg="white"
         >
-          <Header />
+          <Header onSubmit={searchMeal} />
         </GridItem>
 
         <GridItem
-          pos="sticky"
-          top="60px"
           p="3"
           area={"nav"}
-          minHeight="calc(100vh - 60px)"
-          overflowY="auto"
+          pos="sticky"
+          height="calc(100vh - 60px)"
+          top="60px"
+          left="0"
           bg="white"
+          overflowY="auto"
         >
           <SideBar selected={selectedCategory} onClick={setSelectedCategory} />
         </GridItem>

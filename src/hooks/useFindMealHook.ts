@@ -26,5 +26,16 @@ export default function useFindMealHook<T>(url: string) {
     };
   }, [url]);
 
-  return { data, loading };
+  async function findMeals(url: string) {
+    let ignore = false;
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    axios
+      .get<{ meals: T[] }>(url, { signal })
+      .then(({ data }) => !ignore && setData(data.meals))
+      .finally(() => !ignore && setLoading(false));
+  }
+
+  return { data, loading, findMeals };
 }

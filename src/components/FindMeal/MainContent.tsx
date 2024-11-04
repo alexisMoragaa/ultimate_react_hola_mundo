@@ -19,6 +19,7 @@ function MainContent({ data, loading }: Props) {
         {loading && skeletons.map((s) => <SkeletonCard key={s} />)}
 
         {!loading &&
+          data &&
           data.map((meal) => <CardMeal key={meal.idMeal} meal={meal} />)}
       </SimpleGrid>
     </>
