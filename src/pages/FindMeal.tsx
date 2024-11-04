@@ -2,37 +2,43 @@ import { Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import Header from "../components/FindMeal/Header";
 import SideBar from "../components/FindMeal/SideBar";
 import MainContent from "../components/FindMeal/MainContent";
-import { Meal, Category, searchForm } from "../types";
+import { Meal, Category, searchForm, MealDetail } from "../types";
 import { useState } from "react";
 import useFindMealHook from "../hooks/useFindMealHook";
 import RecipiModal from "../components/FindMeal/RecipiModal";
+import useFetchData from "../hooks/useFetchData";
 
 function FindMeal() {
+  const baseURL = "https://www.themealdb.com/api/json/v1/1/";
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const [selectedCategory, setSelectedCategory] = useState<Category>({
     strCategory: "Beef",
   });
 
-  let url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory.strCategory}`;
+  let url = `${baseURL}filter.php?c=${selectedCategory.strCategory}`;
 
   const {
     data: dataMeal,
     loading: loadingMeal,
     findMeals,
-    // getDetailMeal,
   } = useFindMealHook<Meal>(url);
 
   const searchMeal = (data: searchForm) => {
-    url = `https:/www.themealdb.com/api/json/v1/1/search.php?s=${data.search}`;
+    url = `${baseURL}search.php?s=${data.search}`;
     findMeals(url);
   };
 
-  // const getIdMeal = (idMeal: string) => {
-  //   url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
-  //   console.log(url);
-  //   // getDetailMeal(url);
-  // };
+  const {
+    fetchData,
+    data: detailMeal,
+    loading: loadingModal,
+  } = useFetchData<MealDetail>();
+  const searchMealDetail = (meal: Meal) => {
+    onOpen();
+    fetchData(`${baseURL}lookup.php?i=${meal.idMeal}`);
+    console.log(detailMeal);
+  };
 
   return (
     <>
@@ -71,11 +77,16 @@ function FindMeal() {
           <MainContent
             data={dataMeal}
             loading={loadingMeal}
-            openRecipe={onOpen}
+            openRecipe={searchMealDetail}
           />
         </GridItem>
       </Grid>
-      <RecipiModal isOpen={isOpen} onClose={onClose} />
+      <RecipiModal
+        meal={detailMeal}
+        loading={loadingModal}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </>
   );
 }
