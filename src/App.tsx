@@ -1,4 +1,5 @@
-import FindMeal from "./pages/FindMeal";
+import ContextPage from "./pages/ContextPage";
+// import FindMeal from "./pages/FindMeal";
 // import Efects from "./pages/Efects";
 // import Cms from "./pages/Cms";
 // import Formularios from "./pages/Formularios";
@@ -7,7 +8,8 @@ import FindMeal from "./pages/FindMeal";
 function App() {
   return (
     <>
-      <FindMeal />
+      <ContextPage />
+      {/* <FindMeal /> */}
       {/* <Efects /> */}
       {/* <Cms /> */}
       {/* <Formularios /> */}
