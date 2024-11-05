@@ -1,9 +1,11 @@
+import useTitle from "../../hooks/useTitle";
 import TodoList from "./TodoList";
 
 function MainContent() {
+  const { title } = useTitle();
   return (
     <>
-      <p>Main Content</p>
+      <h2>{title}</h2>
       <TodoList />
     </>
   );

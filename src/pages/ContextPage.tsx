@@ -1,5 +1,6 @@
 import Dashboard from "../components/ContextPage/Dashboard";
 import MainContent from "../components/ContextPage/MainContent";
+import TitleProvider from "../providers/TitleProvider";
 import TodosProvider from "../providers/TodosProvider";
 import UserProvider from "../providers/UserProvider";
 
@@ -8,8 +9,10 @@ function ContextPage() {
     <>
       <TodosProvider>
         <UserProvider>
-          <Dashboard />
-          <MainContent />
+          <TitleProvider>
+            <Dashboard />
+            <MainContent />
+          </TitleProvider>
         </UserProvider>
       </TodosProvider>
     </>

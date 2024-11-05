@@ -2,6 +2,7 @@ import useTodos from "../../hooks/useTodos";
 
 function TodoList() {
   const { todos, addTodo } = useTodos();
+
   return (
     <>
       <button
@@ -16,12 +17,12 @@ function TodoList() {
       >
         Add
       </button>
+
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>{todo.name}</li>
         ))}
       </ul>
-      <p>Hola llegamos</p>
     </>
   );
 }
