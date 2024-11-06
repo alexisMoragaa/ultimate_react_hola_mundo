@@ -7,10 +7,10 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
-import { useTodos } from "../../todosModule";
+import useTodosStore from "../../todosModule/store";
 
 function ReducerLeson() {
-  const { todos, dispatch } = useTodos();
+  const { todos, add, remove } = useTodosStore();
 
   return (
     <>
@@ -23,10 +23,7 @@ function ReducerLeson() {
             size="sm"
             onClick={() => {
               let id = Math.random();
-              dispatch({
-                type: "ADD",
-                todo: { id: id, name: `Hola ${id}`, completed: false },
-              });
+              add({ id: id, name: `Hola ${id}`, completed: false });
             }}
           >
             ADD TODO
@@ -46,10 +43,7 @@ function ReducerLeson() {
                   color="orange.300"
                   size="xs"
                   onClick={() => {
-                    dispatch({
-                      type: "REMOVE",
-                      idTodo: todo.id,
-                    });
+                    remove(todo.id);
                   }}
                 >
                   Remove
