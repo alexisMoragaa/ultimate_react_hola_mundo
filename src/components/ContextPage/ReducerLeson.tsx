@@ -3,11 +3,11 @@ import {
   Card,
   CardBody,
   ListItem,
-  Text,
   UnorderedList,
 } from "@chakra-ui/react";
 
 import useTodosStore from "../../todosModule/store";
+import HeaderReducer from "./HeaderReducer";
 
 function ReducerLeson() {
   const { todos, add, remove } = useTodosStore();
@@ -16,8 +16,7 @@ function ReducerLeson() {
     <>
       <Card>
         <CardBody>
-          <Text>Reducer Clase 2 TODOS</Text>
-
+          <HeaderReducer />
           <Button
             colorScheme="teal"
             size="sm"
