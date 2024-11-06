@@ -34,11 +34,6 @@ function ContextPage() {
             </TodosReducerProviders>
           </Box>
         </SimpleGrid>
-
-        <div className="row">
-          <div className="col-6"></div>
-          <div className="col-6"></div>
-        </div>
       </Container>
     </>
   );
