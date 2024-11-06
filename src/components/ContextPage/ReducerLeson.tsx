@@ -10,7 +10,7 @@ import useTodosStore from "../../todosModule/store";
 import HeaderReducer from "./HeaderReducer";
 
 function ReducerLeson() {
-  const { todos, add, remove } = useTodosStore();
+  const { todos, add, remove, update } = useTodosStore();
 
   return (
     <>
@@ -40,6 +40,20 @@ function ReducerLeson() {
                 {todo.name}
                 <Button
                   color="orange.300"
+                  size="xs"
+                  onClick={() => {
+                    update({
+                      id: todo.id,
+                      name: `Hola Feliz ${todo.id}`,
+                      completed: false,
+                    });
+                  }}
+                >
+                  update
+                </Button>
+
+                <Button
+                  color="red.300"
                   size="xs"
                   onClick={() => {
                     remove(todo.id);
