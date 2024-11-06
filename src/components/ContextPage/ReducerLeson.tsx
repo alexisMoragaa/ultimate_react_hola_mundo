@@ -7,11 +7,10 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
-import { useContext } from "react";
-import TodosReducerContext from "../../contexts/TodosReducerContext";
+import { useTodos } from "../../todosModule";
 
 function ReducerLeson() {
-  const { todos, dispatch } = useContext(TodosReducerContext);
+  const { todos, dispatch } = useTodos();
 
   return (
     <>

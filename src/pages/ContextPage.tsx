@@ -4,7 +4,7 @@ import TitleProvider from "../providers/TitleProvider";
 import TodosProvider from "../providers/TodosProvider";
 import UserProvider from "../providers/UserProvider";
 import ReducerLeson from "../components/ContextPage/ReducerLeson";
-import TodosReducerProviders from "../providers/TodosReducerProvider";
+import { TodosReducerProviders } from "../todosModule";
 import { Box, Container, SimpleGrid } from "@chakra-ui/react";
 import ReducerUno from "../components/ContextPage/ReducerUno";
 
