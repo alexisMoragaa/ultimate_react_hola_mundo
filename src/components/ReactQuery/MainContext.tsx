@@ -22,7 +22,11 @@ function MainContent() {
         <Select
           placeholder="Selecciona un usuario"
           value={userId}
-          onChange={(e) => setUserId(Number(e.target.value))}
+          onChange={(e) => {
+            e.target.value !== ""
+              ? setUserId(Number(e.target.value))
+              : setUserId(undefined);
+          }}
         >
           <option value="">Ver Todos</option>
           <option value="1">Usuario 1</option>
