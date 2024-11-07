@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { Heading, ListItem, UnorderedList, Text } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 
 type Todo = {
   userId: number;
@@ -8,23 +9,30 @@ type Todo = {
 };
 
 function MainContent() {
-  const [data, setData] = useState<Todo[]>([]);
+  const getTodos = (): Promise<Todo[]> =>
+    fetch("https://jsonplaceholder.typicode.com/todos").then((response) => {
+      if (!response.ok) throw new Error(`Error: ${response.status}`);
+      return response.json();
+    });
 
-  useEffect(() => {
-    const url = "https://jsonplaceholder.typicode.com/todos";
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+  });
 
-    fetch(url)
-      .then((response) => response.json() as Promise<Todo[]>)
-      .then((data) => setData(data));
-  }, []);
   return (
     <>
-      <h2>Todos</h2>
-      <ul>
-        {data.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+      <Heading as="h5" size="lg" mt={4}>
+        Todo List
+      </Heading>
+
+      <UnorderedList styleType="'- '">
+        {error && <Text>No pudimos recuperrar los datos: {error.message}</Text>}
+        {isLoading && <Text>Cargando...</Text>}
+        {data?.map((todo) => (
+          <ListItem key={todo.id}>{todo.title}</ListItem>
         ))}
-      </ul>
+      </UnorderedList>
     </>
   );
 }

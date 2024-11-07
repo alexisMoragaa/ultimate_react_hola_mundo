@@ -1,13 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MainContent from "../components/ReactQuery/MainContext";
-import { Heading } from "@chakra-ui/react";
+import { Container, Heading } from "@chakra-ui/react";
 
 function ReactQuery() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Heading as="h2">React Query Section</Heading>
-      <MainContent />
+      <Container maxW="5xl">
+        <Heading as="h2" size="2xl">
+          React Query Section
+        </Heading>
+        <MainContent />
+      </Container>
     </QueryClientProvider>
   );
 }
