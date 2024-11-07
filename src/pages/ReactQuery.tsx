@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MainContent from "../components/ReactQuery/MainContext";
 import { Container, Heading } from "@chakra-ui/react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function ReactQuery() {
   const queryClient = new QueryClient();
@@ -12,6 +13,7 @@ function ReactQuery() {
         </Heading>
         <MainContent />
       </Container>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
