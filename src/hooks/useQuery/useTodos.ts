@@ -51,7 +51,7 @@ const getTosInfinity = (
     .then((response) => response.data);
 };
 
-export function useTodosInfiniti(pageSize: number) {
+export function useTodosInfinity(pageSize: number) {
   return useInfiniteQuery({
     queryKey: ["some"],
     queryFn: ({ pageParam }) => getTosInfinity(pageParam, pageSize),
