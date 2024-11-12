@@ -1,14 +1,19 @@
-import { Link } from "react-router-dom";
+import { isRouteErrorResponse, Link, useRouteError } from "react-router-dom";
 import styles from "./Error.module.css";
 
 export default function ErrorDetail() {
+  const error = useRouteError();
+  const routingError = isRouteErrorResponse(error);
   return (
     <div className={styles.errorContainer}>
       <div className={styles.noise}></div>
       <div className={styles.overlay}></div>
       <div className={styles.terminal}>
         <h1>
-          Error <span className={styles.errorcode}>404</span>
+          Error{" "}
+          <span className={styles.errorcode}>
+            {routingError ? error.status : "Ha ocurrido un error"}
+          </span>
         </h1>
         <p className={styles.output}>
           The page you are looking for might have been removed, had its name
