@@ -2,6 +2,7 @@ import { useState } from "react";
 import CmsForm from "../components/Forms/CmsForm";
 import ListCms from "../components/List/ListCms";
 import { cmsForm } from "../schemas/cms";
+import NavBar from "../components/NavBar/NavBar";
 
 function Cms() {
   const [list, setList] = useState<cmsForm[]>([]);
@@ -21,6 +22,7 @@ function Cms() {
 
   return (
     <>
+      <NavBar />
       <div className="col-12">
         <h2>Formulario</h2>
         <CmsForm onSubmit={addContact} />

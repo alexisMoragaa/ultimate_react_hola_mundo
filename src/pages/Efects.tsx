@@ -1,4 +1,5 @@
 import Button from "../components/Button/Button2";
+import NavBar from "../components/NavBar/NavBar";
 import fetchData from "../hooks/fetchData";
 
 type User = {
@@ -22,6 +23,7 @@ function Efects() {
 
   return (
     <>
+      <NavBar />
       <h3>
         Seccion <b>Efectos</b>
       </h3>

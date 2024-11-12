@@ -7,10 +7,12 @@ import ReducerLeson from "../components/ContextPage/ReducerLeson";
 import { TodosReducerProviders } from "../todosModule";
 import { Box, Container, SimpleGrid } from "@chakra-ui/react";
 import ReducerUno from "../components/ContextPage/ReducerUno";
+import NavBar from "../components/NavBar/NavBar";
 
 function ContextPage() {
   return (
     <>
+      <NavBar />
       <Container maxW="5xl">
         <SimpleGrid columns={2} spacing={10} mt={4}>
           <Box>

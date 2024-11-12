@@ -7,6 +7,7 @@ import { useState } from "react";
 import useFindMealHook from "../hooks/useFindMealHook";
 import RecipiModal from "../components/FindMeal/RecipiModal";
 import useFetchData from "../hooks/useFetchData";
+import NavBar from "../components/NavBar/NavBar";
 
 function FindMeal() {
   const baseURL = "https://www.themealdb.com/api/json/v1/1/";
@@ -42,6 +43,7 @@ function FindMeal() {
 
   return (
     <>
+      <NavBar />
       <Grid
         fontSize={14}
         templateAreas={`"header header" "nav main"`}

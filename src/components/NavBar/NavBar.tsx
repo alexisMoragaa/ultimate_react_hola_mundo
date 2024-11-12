@@ -5,7 +5,7 @@ export default function NavBar() {
   return (
     <Grid templateColumns="repeat(8, 1fr)" boxShadow="lg" p={2}>
       <Link to="/">Home</Link>
-      <Link to="react-query">React Query</Link>
+      <Link to="/react-query">React Query</Link>
       <Link to="/find-meal">Find Meal</Link>
       <Link to="/cms">CMS</Link>
       <Link to="/context">Context</Link>
