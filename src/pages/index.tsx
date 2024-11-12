@@ -8,11 +8,13 @@ import EjerciciosAnteriores from "./EjerciciosAnteriores";
 import Formularios from "./Formularios";
 import Home from "./Home";
 import NavBar from "../components/NavBar/NavBar";
+import ErrorDetail from "./ErrorDetail";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <NavBar />,
+    errorElement: <ErrorDetail />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/react-query", element: <ReactQuery /> },
