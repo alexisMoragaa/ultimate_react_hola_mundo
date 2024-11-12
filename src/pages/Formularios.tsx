@@ -2,12 +2,10 @@ import ReactHookForm from "../components/Forms/ReactHookForm";
 import FormControlled from "../components/Forms/FormControlled";
 import FormUnControlled from "../components/Forms/FormUncontrolled";
 import FormValidateSchema from "../components/Forms/FormValidateSchema";
-import NavBar from "../components/NavBar/NavBar";
 
 function Formularios() {
   return (
     <>
-      <NavBar />
       <h2 className="mb-4">Modulo Formularios</h2>
 
       <div className="row mb-4">

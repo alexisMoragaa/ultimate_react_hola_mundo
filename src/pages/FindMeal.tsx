@@ -1,13 +1,12 @@
 import { Grid, GridItem, useDisclosure } from "@chakra-ui/react";
-import Header from "../components/FindMeal/Header";
-import SideBar from "../components/FindMeal/SideBar";
-import MainContent from "../components/FindMeal/MainContent";
-import { Meal, Category, searchForm, MealDetail } from "../types";
 import { useState } from "react";
-import useFindMealHook from "../hooks/useFindMealHook";
+import Header from "../components/FindMeal/Header";
+import MainContent from "../components/FindMeal/MainContent";
 import RecipiModal from "../components/FindMeal/RecipiModal";
+import SideBar from "../components/FindMeal/SideBar";
 import useFetchData from "../hooks/useFetchData";
-import NavBar from "../components/NavBar/NavBar";
+import useFindMealHook from "../hooks/useFindMealHook";
+import { Category, Meal, MealDetail, searchForm } from "../types";
 
 function FindMeal() {
   const baseURL = "https://www.themealdb.com/api/json/v1/1/";
@@ -43,7 +42,6 @@ function FindMeal() {
 
   return (
     <>
-      <NavBar />
       <Grid
         fontSize={14}
         templateAreas={`"header header" "nav main"`}

@@ -8,7 +8,6 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import ProductList from "../components/ProductList";
 import ProductDashboard from "../components/ProductDashboard";
-import NavBar from "../components/NavBar/NavBar";
 
 function EjerciciosAnteriores() {
   const [items, setItems] = useState([
@@ -85,7 +84,6 @@ function EjerciciosAnteriores() {
 
   return (
     <>
-      <NavBar />
       <Card>
         <Button onClick={addMinion}>
           Add Minion <FaPlus />
