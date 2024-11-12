@@ -2,15 +2,16 @@ import {
   Button,
   Heading,
   Input,
-  UnorderedList,
-  Text,
   ListItem,
+  Text,
+  UnorderedList,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRef } from "react";
-import { Post } from "../../types";
 import useCreatePost from "../../hooks/useQuery/useCreatePost";
+import useDeletePost from "../../hooks/useQuery/useDeletePost";
+import { Post } from "../../types";
 
 function Mutaciones() {
   const refTitle = useRef<HTMLInputElement>(null);
@@ -21,6 +22,8 @@ function Mutaciones() {
     isPending,
     error: mutateError,
   } = useCreatePost(() => cleanForm);
+
+  const { mutate: deleteMutation } = useDeletePost();
 
   const cleanForm = () => {
     if (refTitle.current?.value && refBody.current?.value) {
@@ -78,7 +81,9 @@ function Mutaciones() {
         )}
 
         {data?.map((todo) => (
-          <ListItem key={todo.id}>{todo.title}</ListItem>
+          <ListItem key={todo.id} onClick={() => deleteMutation(todo)}>
+            {todo.title}
+          </ListItem>
         ))}
       </UnorderedList>
     </>
