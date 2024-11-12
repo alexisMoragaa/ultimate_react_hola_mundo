@@ -7,7 +7,7 @@ function ReactQuery() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Container maxW="5xl">
+      <Container maxW="">
         <Heading as="h2" size="2xl">
           React Query Section
         </Heading>
